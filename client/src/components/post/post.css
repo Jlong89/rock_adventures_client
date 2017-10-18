@@ -1,0 +1,15 @@
+.post-card-image-container {
+    max-height: 100px;
+}
+
+.post-card-image {
+    height: 100%;
+    width: 90%;
+}
+
+.image-grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    margin: 10px;
+}
