@@ -69,7 +69,6 @@ class Post extends Component {
         const { post } = this.props;
         const { imageUrls } = post;
         const imageDivs = imageUrls.map((imageUrl, index) => {
-            console.log(imageUrl)
             return (
                 <figure key={index}>
                     <img src={imageUrl} alt="image"/>
