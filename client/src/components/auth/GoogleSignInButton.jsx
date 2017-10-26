@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AWS from 'aws-sdk';
 
-//import googleSignIn from '../../auth/googleSignIn';
 import 'bulma/css/bulma.css';
 import config from '../../config';
 import { cognito } from '../../auth/awsCognito';
@@ -14,6 +13,7 @@ class GoogleSignInButton extends Component {
     constructor(props) {
         super(props);
         this.googleSignIn = this.googleSignIn.bind(this);
+        this.refresh = this.refresh.bind(this);
     }
 
     componentDidMount() {
@@ -26,6 +26,8 @@ class GoogleSignInButton extends Component {
     }
 
     googleSignIn(googleUser) {
+        const { onLoginSuccess } = this.props;
+
         const googleToken = googleUser.getAuthResponse().id_token;
         AWS.config.update({
             region: 'us-west-2',
@@ -36,6 +38,26 @@ class GoogleSignInButton extends Component {
                 }
             })
         });
+        const profile = googleUser.getBasicProfile();
+        cognito.refreshCognitoCreds().then(() => {
+            const id = AWS.config.credentials.identityId;
+            onLoginSuccess({
+                userId: id,
+                userName: profile.getName(),
+                userImageUrl: profile.getImageUrl()
+            });
+        })
+    }
+    
+    refresh() {
+        return window.gapi.auth2.getAuthInstance().signIn({
+            prompt: 'login'
+        }).then((userUpdate) => {
+            const creds = AWS.config.credentials;
+            const newToken = userUpdate.getAuthResponse().id_token;
+            creds.params.Logins['accounts.google.com'] = newToken;
+            return cognito.refreshCognitoCreds
+        });
     }
 
     render() {
@@ -45,17 +67,9 @@ class GoogleSignInButton extends Component {
     }
 }
 
-function refresh() {
-    window.gapi.auth2.getAuthInstance().signIn({
-        prompt: 'login'
-    }).then((userUpdate) => {
-        const creds = AWS.config.credentials;
-        const newToken = userUpdate.getAuthResponse().id_token;
-        creds.params.Logins['accounts.google.com'] = newToken;
-        return cognito.refreshCognitoCreds
-    })
-}
-
 GoogleSignInButton.displayName = 'GoogleSignInButton';
+GoogleSignInButton.PropTypes = {
+    onLoginSuccess: PropTypes.func
+}
 
 export default GoogleSignInButton;

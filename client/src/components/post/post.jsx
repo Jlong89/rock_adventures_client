@@ -95,7 +95,7 @@ class Post extends Component {
         const { post, user } = this.props;
         const { showDescription, showImages } = this.state;
         const { routeName, routeGrade, routeDescription, thumbSrc, submissionDate } = post;
-        const { userThumb, userName } = user;
+        const { userThumb, userName } = post.author; 
 
         return (
         <div className="post">
