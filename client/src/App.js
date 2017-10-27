@@ -11,8 +11,16 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <nav className="navbar" role="navigation">
+                    <div className="navbar-menu">
+                        <div className="navbar-end">
+                            <ProfileViewContainer/>
+                        </div>
+                    </div>
+                </nav>
+                
                 <PostListContainer/>
-                <ProfileViewContainer/>
+                
             </div>
         );
     }

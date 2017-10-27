@@ -11,14 +11,12 @@ import registerServiceWorker from './registerServiceWorker';
 import rockAdventures from './state/reducers';
 import { post } from './schema/schemas';
 
-import mockPost from './test/mockPost';
+import mockPosts from './test/mockPosts';
 import mockUser from './test/mockUser';
 
 let initialState = {
     loggedInUser: null,
-    posts: [
-        mockPost
-    ]
+    posts: mockPosts
 };
 
 let store = createStore(rockAdventures, initialState);

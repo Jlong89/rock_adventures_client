@@ -9,7 +9,6 @@ class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showDescription: false,
             showImages: false
         };
         this.handleMoreClick = this.handleMoreClick.bind(this);
@@ -33,11 +32,10 @@ class Post extends Component {
     };
 
     renderDescription() {
-        const { showDescription } = this.state;
         const { post } = this.props;
         const { routeName, routeGrade, routeDescription, thumbSrc, submissionDate, routeType, routeProtection } = post;
         return (
-            <div className="tile is-6">
+            <div className="tile is-4">
                 <div className="tile is-parent">
                     <div className="tile is-child box">
                         <div className="content" style={{
@@ -66,6 +64,7 @@ class Post extends Component {
     }
 
     renderImages() {
+        //TODO need to handle pagination of images
         const { post } = this.props;
         const { imageUrls } = post;
         const imageDivs = imageUrls.map((imageUrl, index) => {
@@ -77,13 +76,11 @@ class Post extends Component {
         });
 
         return (
-            <div className="tile is-ancestor">
-                <div className="tile is-10">
-                    <div className="tile is-parent">
-                        <div className="tile is-child box">
-                            <div className="image-grid-container">
-                                {imageDivs}
-                            </div>
+            <div className="tile is-8">
+                <div className="tile is-parent">
+                    <div className="tile is-child box">
+                        <div className="image-grid-container">
+                            {imageDivs}
                         </div>
                     </div>
                 </div>
@@ -94,14 +91,14 @@ class Post extends Component {
     render() {
         const { post, user } = this.props;
         const { showDescription, showImages } = this.state;
-        const { routeName, routeGrade, routeDescription, thumbSrc, submissionDate } = post;
+        const { routeName, routeGrade, routeDescription, thumbSrc, submissionDate, routeType, routeProtection } = post;
         const { userThumb, userName } = post.author; 
 
         return (
         <div className="post">
             <div className="box">
                 <div className="tile is-ancestor">
-                    <div className="tile is-4">
+                    <div className="tile is-3">
                         <div className="tile is-parent">
                             <div className="tile is-child card">
                                     <header className="card-header">
@@ -118,14 +115,14 @@ class Post extends Component {
                                     </header>
                                     <div className="card-image">
                                         <figure className="image">
-                                            <img src={thumbSrc} alt="Placeholder image"/>
+                                            <img src={thumbSrc} alt=""/>
                                         </figure>
                                     </div>
                                     <div className="card-content">
                                         <div className="media">
                                             <div className="media-left">
                                                 <figure className="image is-48x48">
-                                                    <img src={userThumb} alt="Placeholder image"/>
+                                                    <img src={userThumb} alt="user"/>
                                                 </figure>
                                             </div>
                                             <div className="media-content">
@@ -137,18 +134,12 @@ class Post extends Component {
                                         <a href='#' className="card-footer-item" onClick={this.handleShowImagesClick}>
                                             Images
                                         </a>
-                                        <a href="#" className="card-footer-item" onClick={this.handleMoreClick}>
-                                            {(showDescription ? "Close Details" : "More")}
-                                        </a>
                                     </footer>
                                 </div>
                         </div> 
                     </div>
-                    {showDescription ? 
-                        this.renderDescription() : null}
+                    {showImages ? this.renderImages() : this.renderDescription() }
                 </div>
-                {showImages ? 
-                    this.renderImages() : null}
             </div>
         </div>
         );
