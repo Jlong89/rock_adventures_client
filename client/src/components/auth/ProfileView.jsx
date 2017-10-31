@@ -40,5 +40,9 @@ class ProfileView extends Component {
 //TODO add proptypes
 
 ProfileView.displayName = 'ProfileView';
+ProfileView.PropTypes = {
+    loggedInUser: PropTypes.object,
+    onLoginSuccess: PropTypes.func
+}
 
 export default ProfileView;

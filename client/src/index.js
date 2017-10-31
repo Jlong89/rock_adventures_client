@@ -11,8 +11,14 @@ import registerServiceWorker from './registerServiceWorker';
 import rockAdventures from './state/reducers';
 import { post } from './schema/schemas';
 
+import { cognito } from './auth/awsCognito';
 import mockPosts from './test/mockPosts';
 import mockUser from './test/mockUser';
+
+//TODO fix temporary unauthenticated cognito login
+//const unauthUser;
+
+cognito.setUnauthCognitoCredentials();
 
 let initialState = {
     loggedInUser: null,
