@@ -5,17 +5,17 @@ function cognitoRefresh() {
     return AWS.config.credentials.getPromise();
 }
 
-function setUnauthCognitoCredentials() {
+function getUnauthCognitoCredentials() {
     AWS.config.region = 'us-west-2';
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         IdentityPoolId: config.aws_cognito.poolId
     });
-    console.log(AWS.config.credentials.identityId);
+    return AWS.config.credentials.getPromise();
 }
 
 const cognito = {
     refreshCognitoCreds: cognitoRefresh,
-    setUnauthCognitoCredentials: setUnauthCognitoCredentials
+    getUnauthCognitoCredentials: getUnauthCognitoCredentials
 }
 
 export {

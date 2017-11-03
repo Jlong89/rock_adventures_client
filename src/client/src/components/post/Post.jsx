@@ -33,7 +33,7 @@ class Post extends Component {
 
     renderDescription() {
         const { post } = this.props;
-        const { routeName, routeGrade, routeDescription, thumbSrc, submissionDate, routeType, routeProtection } = post;
+        const { routeName, routeGrade, routeDescription, submissionDate, routeType, routeProtection } = post;
         return (
             <div className="tile is-4">
                 <div className="tile is-parent">
@@ -70,7 +70,7 @@ class Post extends Component {
         const imageDivs = imageUrls.map((imageUrl, index) => {
             return (
                 <figure key={index}>
-                    <img src={imageUrl} alt="image"/>
+                    <img src={imageUrl} alt="awesome rock"/>
                 </figure>
             );
         });
@@ -89,10 +89,10 @@ class Post extends Component {
     }
 
     render() {
-        const { post, user } = this.props;
+        const { post } = this.props;
         const { showDescription, showImages } = this.state;
-        const { routeName, routeGrade, routeDescription, thumbSrc, submissionDate, routeType, routeProtection } = post;
-        const { userThumb, userName } = post.author; 
+        const { routeName, routeGrade, routeDescription, thumbSrc, submissionDate } = post;
+        const { userImageUrl, userName } = post.author; 
 
         return (
         <div className="post">
@@ -122,7 +122,7 @@ class Post extends Component {
                                         <div className="media">
                                             <div className="media-left">
                                                 <figure className="image is-48x48">
-                                                    <img src={userThumb} alt="user"/>
+                                                    <img src={userImageUrl} alt="user"/>
                                                 </figure>
                                             </div>
                                             <div className="media-content">
