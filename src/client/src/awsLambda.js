@@ -3,7 +3,7 @@ import AWS from 'aws-sdk';
 function fetchPosts() {
     const lambda = new AWS.Lambda();
     const params = {
-        FunctionName: 'rockAdventuresLambda',
+        FunctionName: 'rockAdventuresGetPosts',
         Payload: JSON.stringify({})
     };
     return new Promise((resolve, reject) => {

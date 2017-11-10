@@ -33,7 +33,7 @@ class Post extends Component {
 
     renderDescription() {
         const { post } = this.props;
-        const { routeName, routeGrade, routeDescription, submissionDate, routeType, routeProtection, area } = post;
+        const { routeName, routeGrade, routeDescription, routeType, routeProtection, area } = post;
         return (
             <div className="tile is-4">
                 <div className="tile is-parent">
@@ -91,7 +91,7 @@ class Post extends Component {
 
     render() {
         const { post } = this.props;
-        const { showDescription, showImages } = this.state;
+        const { showImages } = this.state;
         const { routeName, routeGrade, submissionDate, imageUrls } = post;
         const { userImageUrl, userName } = post.author; 
         const thumbSrc = (imageUrls && imageUrls.length !== 0) ? imageUrls[0] : "";
@@ -134,7 +134,7 @@ class Post extends Component {
                                         </div>
                                     </div>
                                     <footer className="card-footer">
-                                        <a href='#' className="card-footer-item" onClick={this.handleShowImagesClick}>
+                                        <a href='' className="card-footer-item" onClick={this.handleShowImagesClick}>
                                             { showImages ? "Description" : "Images" }
                                         </a>
                                     </footer>

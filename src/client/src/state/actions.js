@@ -1,4 +1,3 @@
-import AWS from 'aws-sdk';
 import { lambda } from '../awsLambda';
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

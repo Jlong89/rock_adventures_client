@@ -15,7 +15,7 @@ class ProfileView extends Component {
                     <article className="media">
                         <div className="media-left">
                             <figure className="image is-32x32">
-                                <img src={loggedInUser.userImageUrl} alt="Image"/>
+                                <img src={loggedInUser.userImageUrl} alt=""/>
                             </figure>
                         </div>
                         <div className="media-content">

@@ -6,6 +6,7 @@ class TopNavBar extends Component {
     
     render() {
         return(
+            // eslint-disable-next-line
             <nav className="navbar" role="navigation">
                 <div className="navbar-menu">
                     <div className="navbar-end">

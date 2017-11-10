@@ -9,11 +9,13 @@ exports.esClient = require('elasticsearch').Client({
 });
 
 exports.getPosts = function(json, context) {
+    const { size, from } = json;
     exports.esClient.search({
         index: 'test2',
         type: 'mockpost',
         sort: 'submissionDate',
-        size: 10,
+        size: size,
+        from: from,
         _source: true
     }).then((response) => {
         const posts = response.hits.hits;
