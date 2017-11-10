@@ -4,7 +4,6 @@ import GoogleSignInButton from './GoogleSignInButton';
 
 import 'bulma/css/bulma.css';
 
-
 class ProfileView extends Component {
     
    render() {

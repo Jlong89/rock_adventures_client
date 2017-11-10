@@ -1,16 +1,8 @@
 import AWS from 'aws-sdk';
+import { lambda } from '../awsLambda';
 
-const LOGIN_SUCCESS = 'LOGGIN_SUCCESS';
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const ON_FETCH_POSTS_SUCCESS = 'ON_FETCH_POSTS_SUCCESS';
-
-function lambdaFetchPosts() {
-    const lambda = new AWS.Lambda();
-    const params = {
-        FunctionName: 'rockAdventuresLambda',
-        Payload: JSON.stringify({})
-    };
-    return lambda.invoke(params);
-}
 
 function onFetchPostsSuccess(posts) {
     return {
@@ -21,7 +13,7 @@ function onFetchPostsSuccess(posts) {
 
 function getPosts() {
     return function(dispatch) {
-        const req = lambdaFetchPosts();
+        const req = lambda.lambdaFetchPosts();
         req.on('success', (resp) => {
             const payload = JSON.parse(resp.data.Payload);
             const posts = payload.map((hit) => {

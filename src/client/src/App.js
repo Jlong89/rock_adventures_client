@@ -8,12 +8,6 @@ import { cognito } from './auth/awsCognito';
 
 class App extends Component {
 
-    componentDidMount() {
-        cognito.getUnauthCognitoCredentials().then(() => {
-            this.props.dispatch(getPosts());
-        });
-    }
-
     render() {
         return (
             <div className="App">

@@ -33,7 +33,7 @@ class Post extends Component {
 
     renderDescription() {
         const { post } = this.props;
-        const { routeName, routeGrade, routeDescription, submissionDate, routeType, routeProtection } = post;
+        const { routeName, routeGrade, routeDescription, submissionDate, routeType, routeProtection, area } = post;
         return (
             <div className="tile is-4">
                 <div className="tile is-parent">
@@ -44,6 +44,7 @@ class Post extends Component {
                             <p><strong>Route Name:</strong> {routeName} </p> 
                             <p><strong>Grade:</strong> {routeGrade} </p>
                             <p><strong>Type:</strong> {routeType}</p>
+                            <p><strong>Crag:</strong> {area}</p>
                             {routeProtection ? <p><strong>Pro:</strong> {routeProtection}</p> : null}
                             <div className="box">
                                 <div className="content" style={{
@@ -91,9 +92,10 @@ class Post extends Component {
     render() {
         const { post } = this.props;
         const { showDescription, showImages } = this.state;
-        const { routeName, routeGrade, routeDescription, thumbSrc, submissionDate } = post;
+        const { routeName, routeGrade, submissionDate, imageUrls } = post;
         const { userImageUrl, userName } = post.author; 
-
+        const thumbSrc = (imageUrls && imageUrls.length !== 0) ? imageUrls[0] : "";
+        
         return (
         <div className="post">
             <div className="box">
@@ -127,12 +129,13 @@ class Post extends Component {
                                             </div>
                                             <div className="media-content">
                                                 <p className="title is-4">{userName}</p>
+                                                <p className="subtitle is-6">{submissionDate}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <footer className="card-footer">
                                         <a href='#' className="card-footer-item" onClick={this.handleShowImagesClick}>
-                                            Images
+                                            { showImages ? "Description" : "Images" }
                                         </a>
                                     </footer>
                                 </div>
